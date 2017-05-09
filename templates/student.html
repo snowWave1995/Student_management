@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学生管理</title>
+    <link href="/static/css/semantic.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="ui three column grid">
+    <div class="column">
+    </div>
+    <div class="ui column">
+        <div class="ui pointing secondary menu">
+            <a class="item active" data-tab="first">基本信息</a>
+            <a class="item right" data-tab="second">成绩</a>
+
+        </div>
+
+        <div class="ui tab segment active" data-tab="first">
+
+            <p>学号&#12288&#12288&#12288&#12288 {{ student.s_number }}</p>
+            <p>姓名&#12288&#12288&#12288&#12288 {{ student.s_name }}</p>
+            <p>性别&#12288&#12288&#12288&#12288 {{ student.sex }}</p>
+            <p>专业&#12288&#12288&#12288&#12288 {{ student.subject }}</p>
+            <p>年级&#12288&#12288&#12288&#12288 {{ student.grade }}</p>
+            <p>身份证号&#12288&#12288 {{ student.ID_number }}</p>
+            <p>籍贯&#12288&#12288&#12288&#12288 {{ student.native_place }}</p>
+
+        </div>
+        <div class="ui tab segment " data-tab="second">
+            <p>课程名&#12288&#12288&#12288&#12288
+                课程编号&#12288&#12288&#12288
+                学分&#12288&#12288&#12288
+                学时&#12288&#12288&#12288&#12288成绩</p>
+            {% for s in score %}
+                {% if s.lName == "嵌入式"%}
+                    <p>{{ s.lName }}&#12288&#12288&#12288&#12288
+                        {{ s.lNum }}&#12288&#12288&#12288&#12288
+                        {{ s.lCredit }}&#12288&#12288&#12288&#12288
+                        {{ s.lTime }}&#12288&#12288&#12288&#12288&#12288
+                        {% if s.score != 0 %}
+                        {{ s.score }}
+                            {% else %}
+                                未出
+                            {% endif %}
+                            </p>
+                {% endif %}
+                {% if s.lName != "嵌入式" %}
+                    <p>{{ s.lName }}&#12288&#12288&#12288
+                        {{ s.lNum }}&#12288&#12288&#12288&#12288
+                        {{ s.lCredit }}&#12288&#12288&#12288&#12288
+                        {{ s.lTime }}&#12288&#12288&#12288&#12288&#12288
+                        {% if s.score != 0 %}
+                        {{ s.score }}
+                            {% else %}
+                                未出
+                            {% endif %}
+                    </p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+    <div class="column">
+    </div>
+</div>
+
+<!--被个路径坑了。。。。 -->
+<script src="/static/js/jquery-1.11.2.min.js"></script>
+<script src="/static/js/semantic.min.js"></script>
+<script src="/static/js/01.js"></script>
+
+
+</body>
+</html>

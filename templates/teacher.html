@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>教师管理</title>
+    <link href="/static/css/semantic.min.css" rel="stylesheet">
+    <style type="text/css">
+        #la {
+            font-family: "Microsoft YaHei UI";
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+<div class="ui three column grid">
+    <div class="column">
+    </div>
+    <div class="ui column">
+        <div class="ui pointing secondary menu">
+
+             <a class="item active" data-tab="first">教师信息</a>
+            <a class="item " data-tab="second">提交成绩</a>
+            <a class="item right" data-tab="third">汇总</a>
+
+        </div>
+        <div class="ui tab segment active" data-tab="first">
+            <p>工号 &#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288 {{ teacher.t_number }}</p>
+            <p>姓名&#8194&#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288&#12288 {{ teacher.t_name }}</p>
+            <p>所授课程 &#12288&#12288&#12288&#12288&#12288&#12288&#12288 {{ teacher.t_lesson_name }}</p>
+            <p>所授课程编号 &#12288&#12288&#12288&#12288&#12288 {{ teacher.t_lesson_id }}</p>
+        </div>
+        <div class="ui tab segment " data-tab="second">
+
+                <table class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th><label id="la">学号</label></th>
+                        <th><label id="la">姓名</label></th>
+                        <th><label id="la">成绩</label></th>
+                        <th><label id="la">修改</label></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for s in score %}
+                        <tr>
+                            {% if s.score == 0 %}
+                            <td>{{ s.sNum }}</td>
+                            <td>{{ s.sName }}</td>
+                             <form class="ui form" method="POST" action="/change/?lid={{teacher.t_lesson_id}}&sid={{s.id}}">
+                            <td><input type="text" name="score" style="width:70px;"></td>
+                            <td>
+                                <input type="submit" style="float:right;" class="ui tiny button " value="确定">
+                            </td>
+                             </form>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+        </div>
+        <div class="ui tab segment " data-tab="third">
+            <p>学号&#12288&#12288&#12288&#12288&#12288&#12288&#12288
+                姓名&#12288&#12288&#12288&#12288&#12288&#12288
+                成绩&#12288&#12288&#12288&#12288&#12288&#12288备注
+                </p>
+            {% for s in score %}
+                {% if s.score == 0 %}
+                    <p>{{ s.sNum }}&#12288&#12288&#12288
+                        {{ s.sName }}&#12288&#12288&#12288&#12288&#12288&#12288
+                        {{ s.score }}&#12288&#12288&#12288&#12288&#12288 未提交</p>
+
+                {% else %}
+                    <p>{{ s.sNum }}&#12288&#12288&#12288
+                        {{ s.sName }}&#12288&#12288&#12288&#12288&#12288&#12288
+                        {{ s.score }}&#12288&#12288&#12288&#12288&#12288 已提交</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+    <div class="column">
+    </div>
+</div>
+
+
+<script src="/static/js/jquery-1.11.2.min.js"></script>
+<script src="/static/js/semantic.min.js"></script>
+<script src="/static/js/01.js"></script>
+</body>
+</html>
