@@ -1,0 +1,2 @@
+# Student_management
+基于Django的简单学生成绩管理系统，实现了学生登录查分以及教师登录录入成绩
